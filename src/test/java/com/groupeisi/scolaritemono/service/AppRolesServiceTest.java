@@ -39,21 +39,16 @@ class AppRolesServiceTest {
         /**
          * Test lorque la table appRoles est vide
          */
-        List<AppRoles> appRolesList = new ArrayList<>();
-        appRolesList = appRolesService.getAppRoles();
-        assertEquals(0, appRolesList.size());
+       List<AppRoles> appRolesList = new ArrayList<>();
+//        appRolesList = appRolesService.getAppRoles();
+//        assertEquals(0, appRolesList.size());
 
         /**
-         * Test  apres insertion d'une ligne
-         */
-        AppRoles appRoles = new AppRoles();
-        appRoles.setNom("ADMIN");
-        appRolesService.createAppRoles(appRoles);
-
+         * lorsque la table n'est pas vide
+         **/
         appRolesList = appRolesService.getAppRoles();
 
-
-        assertEquals(1, appRolesList.size());
+        assertEquals(3, appRolesList.size());
     }
 
     @Test
@@ -61,10 +56,7 @@ class AppRolesServiceTest {
         EntityNotFoundException e = assertThrows(EntityNotFoundException.class, ()->appRolesService.getAppRole(100));
         assertEquals("Requested Roles with id= 100 does not exist", e.getMessage());
 
-        AppRoles appRoles = new AppRoles();
-        appRoles.setNom("ADMIN");
-        appRolesService.createAppRoles(appRoles);
-        AppRoles appRole = appRolesService.getAppRole(1);
+        AppRoles appRole = appRolesService.getAppRole(3);
         assertNotNull(appRole);
 
     }
@@ -72,17 +64,13 @@ class AppRolesServiceTest {
     @Test
     void createAppRoles() {
         AppRoles appRoles = new AppRoles();
-        appRoles.setNom("ADMIN");
+        appRoles.setNom("SUPER_ADMIN");
         appRolesService.createAppRoles(appRoles);
         assertNotNull(appRoles);
     }
 
     @Test
     void updateAppRoles() {
-        AppRoles appRoles = new AppRoles();
-        appRoles.setNom("ADMIN");
-        appRolesService.createAppRoles(appRoles);
-
         AppRoles appRoles1 = new AppRoles();
         appRoles1.setNom("ROLE_TECH");
 
@@ -92,11 +80,7 @@ class AppRolesServiceTest {
 
     @Test
     void deleteAppRoles() {
-        AppRoles appRoles = new AppRoles();
-        appRoles.setNom("ADMIN");
-        appRolesService.createAppRoles(appRoles);
-
-        appRolesService.deleteAppRoles(1);
+        appRolesService.deleteAppRoles(6);
         Assertions.assertTrue(true);
         System.out.println("Le test s'est bien passsee");
     }

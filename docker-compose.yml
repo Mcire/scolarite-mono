@@ -9,6 +9,9 @@ services:
       MYSQL_DATABASE: admin-db
       MYSQL_USER: user
       MYSQL_PASSWORD: user
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_INITDB_SKIP_TZINFO: '1'
+      MYSQL_DATABASE_STORAGE_ENGINE: InnoDB
     ports:
       - 3306:3306
     volumes:
